@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../common/head.ejs') %>
+    <style>
+      body {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .register-container {
+        max-width: 450px;
+        width: 100%;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        text-align: center;
+      }
+      .form-control {
+        border-radius: 50px;
+        padding: 12px;
+      }
+      .btn-custom {
+        background: #6e8efb;
+        color: white;
+        border-radius: 50px;
+        padding: 12px;
+        transition: 0.3s;
+        width: 100%;
+      }
+      .btn-custom:hover {
+        background: #a777e3;
+      }
+      .social-buttons .btn {
+        border-radius: 50px;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <!-- Flash Messages -->
+  <% if (sucess && sucess != '') { %>
+  <div
+    class="alert alert-success"
+    role="alert"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      text-align: center;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+      padding: 10px;
+      z-index: 1000;
+    "
+  >
+    <%= sucess %>
+  </div>
+  <% } else if (err && err != '') { %>
+  <div
+    class="alert alert-danger"
+    role="alert"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      text-align: center;
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 5px;
+      padding: 10px;
+      z-index: 1000;
+    "
+  >
+    <%= err %>
+  </div>
+  <% } %>
+
+  <body>
+    <div class="register-container">
+      <h2 class="text-primary">Create an Account</h2>
+      <p>Join us today and explore the possibilities!</p>
+      <form
+        class="user"
+        action="<%= generateUrl('registercreate') %>"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="row">
+          <div class="col-6">
+            <input
+              type="text"
+              class="form-control mb-3"
+              placeholder="First Name"
+              name="first_name"
+            />
+          </div>
+          <div class="col-6">
+            <input
+              type="text"
+              class="form-control mb-3"
+              placeholder="Last Name"
+              name="last_name"
+            />
+          </div>
+        </div>
+        <input
+          type="email"
+          class="form-control mb-3"
+          placeholder="Email Address"
+          name="email"
+        />
+        <div class="row">
+          <div class="col-6">
+            <input
+              type="password"
+              class="form-control mb-3"
+              placeholder="Password"
+              name="password"
+            />
+          </div>
+          <div class="col-6">
+            <input
+              type="password"
+              class="form-control mb-3"
+              placeholder="Repeat Password"
+              name="repeatpassword"
+            />
+          </div>
+        </div>
+        <input
+          name="image"
+          accept="image/*"
+          type="file"
+          class="form-control mb-3"
+          style="padding: 5px"
+        />
+        <button type="submit" class="btn btn-custom">Register Account</button>
+        <hr />
+      </form>
+      <hr />
+      <div>
+        <a class="small" href="forgot-password.html">Forgot Password?</a>
+      </div>
+      <div>
+        <a class="small" href="<%=generateUrl('login')%>"
+          >Already have an account? Login!</a
+        >
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+  </body>
+</html>
