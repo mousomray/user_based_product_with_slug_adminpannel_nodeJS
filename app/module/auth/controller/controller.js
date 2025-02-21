@@ -5,7 +5,7 @@ const transporter = require('../../../config/emailtransporter')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-class adminAuthController {
+class adminAuthController { 
 
     //Register form
     async registerGet(req, res) {
@@ -152,7 +152,7 @@ class adminAuthController {
             if (token) {
                 res.cookie('admin_auth', token);
                 req.flash('sucess', 'Login Successfully')
-                return res.redirect('productlist');
+                return res.redirect('allproducts');
             } else {
                 req.flash('err', 'Something went wrong')
                 return res.redirect(generateUrl('login'));

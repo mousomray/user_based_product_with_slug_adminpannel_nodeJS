@@ -9,9 +9,7 @@ const ProductSchema = new Schema({
     },
     slug: {
         type: String,
-        unique: [true, 'Slug should be unique'],
-        lowercase: [true, 'Slug must be lowercase'],
-        required: [true, 'Slug is required'],
+        require: true
     },
     description: {
         type: String,

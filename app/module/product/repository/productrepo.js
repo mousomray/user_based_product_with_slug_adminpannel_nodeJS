@@ -13,8 +13,36 @@ class ProductRepo {
         return ProductModel.aggregate([
             {
                 $match: { userId: new mongoose.Types.ObjectId(userId) }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'userId',
+                    foreignField: '_id',
+                    as: 'userdetails'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$userdetails',
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    slug: 1,
+                    description: 1,
+                    image: 1,
+                    price: 1,
+                    'userdetails.first_name': 1,
+                    'userdetails.last_name': 1,
+                    'userdetails.email': 1
+                }
             }
-        ])
+        ]);
+
     }
 
     // Show all product with user for admin 
@@ -37,6 +65,33 @@ class ProductRepo {
         return ProductModel.aggregate([
             {
                 $match: { slug: slug, userId: new mongoose.Types.ObjectId(userId) }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'userId',
+                    foreignField: '_id',
+                    as: 'userdetails'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$userdetails',
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    slug: 1,
+                    description: 1,
+                    image: 1,
+                    price: 1,
+                    'userdetails.first_name': 1,
+                    'userdetails.last_name': 1,
+                    'userdetails.email': 1
+                }
             }
         ])
     }

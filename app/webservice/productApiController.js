@@ -1,4 +1,5 @@
 const ProductRepo = require('../module/product/repository/productrepo')
+const slugify = require('slugify')
 
 
 class productApiController {
@@ -14,7 +15,9 @@ class productApiController {
                     errors: ["Product image is required"]
                 });
             }
-            const productData = { ...req.body, image: req.file.path, userId: userId };
+            const productData = {
+                ...req.body, slug: slugify(req.body.title), image: req.file.path, userId: userId
+            };
             const product = await ProductRepo.createProduct(productData);
             res.status(201).json({
                 success: true,
